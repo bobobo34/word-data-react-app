@@ -1,0 +1,36 @@
+
+body {
+  text-align: center;
+  background-color: #282c34;
+}
+
+.random-word {
+  color: white;
+  font-size: calc(10px + 6vmin)
+}
+
+.EnterButton {
+  position: relative;
+  display: inline-block;
+  padding: 10px;
+  background-color: hsl(220, 13%, 30%);
+  border: none;
+  border-radius: 10%;
+  aspect-ratio: 16 / 9;
+  width: 20%;
+  font-size: 50px;
+  font-family: sans-serif;
+}
+
+.EnterButton:hover {
+  filter: brightness(0.9)
+}
+
+.EnterButton:active {
+  filter: brightness(0.8)
+}
+
+.space {
+  width: 2%;
+  display: inline-block;
+}
