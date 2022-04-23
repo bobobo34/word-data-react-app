@@ -30,19 +30,19 @@ function WordWrapper(type) {
     return (
         <div>
             <RandomWord word={word.word}/>
-            <button className="EnterButton" style={{backgroundColor: 'green'}} onClick={insertIntoData(type = "easy")}>
+            <button className="EnterButton" style={{backgroundColor: 'green'}} onClick={() => insertIntoData("easy")}>
                 easy
             </button>
             <div className='space'></div>
-            <button className="EnterButton" style={{backgroundColor: 'yellow'}} onClick={insertIntoData(type = "medium")}>
+            <button className="EnterButton" style={{backgroundColor: 'yellow'}} onClick={() => insertIntoData("medium")}>
                 medium
             </button>
             <div className='space'></div>
-            <button className="EnterButton" style={{backgroundColor: '#ca6561'}} onClick={insertIntoData(type = "hard")}>
+            <button className="EnterButton" style={{backgroundColor: '#ca6561'}} onClick={() => insertIntoData("hard")}>
                 hard
             </button>
             <div className='space'></div>
-            <button className="EnterButton" style={{backgroundColor: 'red'}} onClick={insertIntoData(type = "impossible")}>
+            <button className="EnterButton" style={{backgroundColor: 'red'}} onClick={() => insertIntoData("impossible")}>
                 impossible
             </button>
         </div>
