@@ -8,14 +8,14 @@ function WordWrapper(type) {
     const [word, getWord] = useState({word:Object.keys(data)[Math.floor(Math.random() * Object.keys(data).length)]});
     const insertIntoData = (type) => {
         let easy = 0, medium = 0, hard = 0, impossible = 0;
-        console.log(word, type);
+        console.log(word.word, type);
         if(type === 'easy') { easy++; }
         else if(type === 'medium') { medium++; }
         else if(type === 'hard') { hard++; }
         else { impossible++; }
         console.log(easy + " " + medium + " " + hard + " " + impossible);
         Axios.post('https://word-data-database.herokuapp.com/api/insert', {
-            word: word, 
+            word: word.word, 
             easy: easy,
             medium: medium,
             hard: hard,
