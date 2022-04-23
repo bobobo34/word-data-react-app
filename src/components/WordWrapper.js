@@ -2,7 +2,8 @@ import { useState } from 'react';
 import RandomWord from './RandomWord';
 import Axios from 'axios';
 const data = require('../words_dictionary.json');
-
+const header = new Headers();
+header.append('Access-Control-Allow-Origin', '*');
 
 function WordWrapper(type) {
     const [word, getWord] = useState({word:Object.keys(data)[Math.floor(Math.random() * Object.keys(data).length)]});
@@ -20,7 +21,7 @@ function WordWrapper(type) {
             medium: medium,
             hard: hard,
             impossible: impossible
-        });
+        }, header);
         newWord();
     }
     const newWord = () => {
