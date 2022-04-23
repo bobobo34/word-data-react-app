@@ -4,17 +4,16 @@ import Axios from 'axios';
 const data = require('../words_dictionary.json');
 
 
-function WordWrapper(props) {
+function WordWrapper(type) {
     const [word, getWord] = useState({word:Object.keys(data)[Math.floor(Math.random() * Object.keys(data).length)]});
-    const insertIntoData = () => {
-        const ranWord = document.getElementsByClassName("random-word")[0];
-        const word = ranWord.textContent;
+    const insertIntoData = (type) => {
         let easy = 0, medium = 0, hard = 0, impossible = 0;
-        console.log(word, props.name);
-        if(props.name === 'easy') { easy++; }
-        else if(props.name === 'medium') { medium++; }
-        else if(props.name === 'hard') { hard++; }
+        console.log(word, type);
+        if(type === 'easy') { easy++; }
+        else if(type === 'medium') { medium++; }
+        else if(type === 'hard') { hard++; }
         else { impossible++; }
+        console.log(easy + " " + medium + " " + hard + " " + impossible);
         Axios.post('https://word-data-database.herokuapp.com/api/insert', {
             word: word, 
             easy: easy,
@@ -31,19 +30,19 @@ function WordWrapper(props) {
     return (
         <div>
             <RandomWord word={word.word}/>
-            <button className="EnterButton" style={{backgroundColor: 'green'}} onClick={insertIntoData}>
+            <button className="EnterButton" style={{backgroundColor: 'green'}} onClick={insertIntoData("easy")}>
                 easy
             </button>
             <div className='space'></div>
-            <button className="EnterButton" style={{backgroundColor: 'yellow'}} onClick={insertIntoData}>
+            <button className="EnterButton" style={{backgroundColor: 'yellow'}} onClick={insertIntoData("medium")}>
                 medium
             </button>
             <div className='space'></div>
-            <button className="EnterButton" style={{backgroundColor: '#ca6561'}} onClick={insertIntoData}>
+            <button className="EnterButton" style={{backgroundColor: '#ca6561'}} onClick={insertIntoData("hard")}>
                 hard
             </button>
             <div className='space'></div>
-            <button className="EnterButton" style={{backgroundColor: 'red'}} onClick={insertIntoData}>
+            <button className="EnterButton" style={{backgroundColor: 'red'}} onClick={insertIntoData("impossible")}>
                 impossible
             </button>
         </div>
