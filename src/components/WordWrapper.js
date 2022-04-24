@@ -5,7 +5,7 @@ const data = require('../words_dictionary.json');
 
 function WordWrapper() {
     const [word, getWord] = useState({word:Object.keys(data)[Math.floor(Math.random() * Object.keys(data).length)]});
-    const insertIntoData = async (type) => {
+    const insertIntoData = (type) => {
         let easy = 0, medium = 0, hard = 0, impossible = 0;
         console.log(word.word, type);
         if(type === 'easy') { easy++; }
@@ -13,17 +13,14 @@ function WordWrapper() {
         else if(type === 'hard') { hard++; }
         else { impossible++; }
         console.log(easy + " " + medium + " " + hard + " " + impossible);
-        try {
-            await Axios.post('https://word-data-database.herokuapp.com/api/insert', {
-                word: word.word, 
-                easy: easy,
-                medium: medium,
-                hard: hard,
-                impossible: impossible
-            });
-        } catch (err) {
-            console.error(err);
-        }   
+        
+        Axios.post('https://word-data-database.herokuapp.com/api/insert', {
+            word: word.word, 
+            easy: easy,
+            medium: medium,
+            hard: hard,
+            impossible: impossible
+        });  
         newWord();
     }
     const newWord = () => {
