@@ -2,7 +2,7 @@ import { useState } from 'react';
 import RandomWord from './RandomWord';
 import Axios from 'axios';
 const data = require('../words_dictionary.json');
-Axios.defaults.withCredentials = true;
+// Axios.defaults.withCredentials = true;
 function WordWrapper() {
     const [word, getWord] = useState({word:Object.keys(data)[Math.floor(Math.random() * Object.keys(data).length)]});
     const insertIntoData = async (type) => {
