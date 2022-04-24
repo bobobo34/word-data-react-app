@@ -5,7 +5,7 @@ const data = require('../words_dictionary.json');
 
 function WordWrapper() {
     const [word, getWord] = useState({word:Object.keys(data)[Math.floor(Math.random() * Object.keys(data).length)]});
-    const insertIntoData = (type) => {
+    const insertIntoData = async (type) => {
         let easy = 0, medium = 0, hard = 0, impossible = 0;
         console.log(word.word, type);
         if(type === 'easy') { easy++; }
@@ -14,7 +14,7 @@ function WordWrapper() {
         else { impossible++; }
         console.log(easy + " " + medium + " " + hard + " " + impossible);
         
-        Axios.post('https://word-data-database.herokuapp.com/api/insert', {
+        await Axios.post('https://word-data-database.herokuapp.com/api/insert', {
             word: word.word, 
             easy: easy,
             medium: medium,
@@ -26,9 +26,14 @@ function WordWrapper() {
     const newWord = () => {
         getWord({word:Object.keys(data)[Math.floor(Math.random() * Object.keys(data).length)]});
     };
-
+    const test = async () => {
+        await Axios.post('https://word-data-database.herokuapp.com/api/test', {
+            test: "test sent through post"
+        });
+    }
     return (
         <div>
+            <button onClick={test}>test</button>
             <RandomWord word={word.word}/>
             <button className="EnterButton" style={{backgroundColor: 'green'}} onClick={() => insertIntoData("easy")}>
                 easy
