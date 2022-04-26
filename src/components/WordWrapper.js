@@ -27,14 +27,8 @@ function WordWrapper() {
     const newWord = () => {
         getWord({word:Object.keys(data)[Math.floor(Math.random() * Object.keys(data).length)]});
     };
-    const test = async () => {
-        await Axios.post('https://word-data-database.herokuapp.com/api/test', {
-            test: "test sent through post"
-        });
-    }
     return (
         <div>
-            <button onClick={test}>test</button>
             <RandomWord word={word.word}/>
             <button className="EnterButton" style={{backgroundColor: 'green'}} onClick={() => insertIntoData("easy")}>
                 easy
