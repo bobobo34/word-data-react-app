@@ -2,6 +2,7 @@ import { useState } from 'react';
 import RandomWord from './RandomWord';
 import Axios from 'axios';
 const data = require('../words_dictionary.json');
+
 // Axios.defaults.withCredentials = true;
 function WordWrapper() {
     const [word, getWord] = useState({word:Object.keys(data)[Math.floor(Math.random() * Object.keys(data).length)]});
@@ -14,7 +15,7 @@ function WordWrapper() {
         else { impossible++; }
         console.log(easy + " " + medium + " " + hard + " " + impossible);
         
-        await Axios.post('https://word-data-database.herokuapp.com/api/insert', {
+        Axios.post('https://word-data-database.herokuapp.com/api/insert', {
             word: word.word, 
             easy: easy,
             medium: medium,
