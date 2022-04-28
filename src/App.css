@@ -10,19 +10,32 @@ body {
 /* 
 class styling
  */
+
 .random-word {
   color: white;
-  background-color: white;
-  font-size: calc(10px + 6vmin);
-  animation: swap 500ms forwards;
+  position: relative;
+  margin: auto;
+  width: 10%;
+  font-size: clamp(1rem, 3vw + 1rem, 4rem);
+  font-family: "Source Code Pro", monospace;
 }
-@keyframes swap {
-  from {
-    left: 0%;
-  }
+.random-word::before,
+.random-word::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.random-word::before {
+  background-color: gray;
+  animation: slide 1s ease forwards;
+}
+@keyframes slide {
   to {
     left: 100%;
-    background-color: var(--bgcolor);
   }
 }
 .EnterButton {
@@ -35,7 +48,7 @@ class styling
   border-radius: 10%;
   aspect-ratio: 16 / 9;
   width: 20%;
-  font-size: 2rem;
+  font-size: 3rem;
   font-family: sans-serif;
 
 }

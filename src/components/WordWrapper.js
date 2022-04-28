@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import RandomWord from './RandomWord';
 import Axios from 'axios';
 const data = require('../words_dictionary.json');
@@ -27,8 +27,22 @@ function WordWrapper() {
     const newWord = () => {
         getWord({word:Object.keys(data)[Math.floor(Math.random() * Object.keys(data).length)]});
     };
+    useEffect(() => {
+        const rw = document.getElementsByClassName("random-word")[0];
+
+        console.log("word changed" + " " + rw);
+    }, [word]);
+    const test = async () => {
+        let results = await Axios.get('https://word-data-database.herokuapp.com/api/get', {
+            params: {word: word.word} 
+        }); 
+        console.log(results); 
+        console.log(results.data);
+        console.log(results.data.length == 0);
+    }
     return (
-        <div>
+        <div className='container'> 
+            <button onClick={test}>test</button>        
             <RandomWord word={word.word}/>
             <button className="EnterButton" style={{backgroundColor: 'green'}} onClick={() => insertIntoData("easy")}>
                 easy
