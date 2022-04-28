@@ -1,15 +1,32 @@
 
+:root{
+  --bgcolor: #282c34;
+}
 body {
   text-align: center;
-  background-color: #282c34;
+  background-color: var(--bgcolor);
+  
 }
-
+/* 
+class styling
+ */
 .random-word {
   color: white;
-  font-size: calc(10px + 6vmin)
+  background-color: white;
+  font-size: calc(10px + 6vmin);
+  animation: swap 500ms forwards;
 }
-
+@keyframes swap {
+  from {
+    left: 0%;
+  }
+  to {
+    left: 100%;
+    background-color: var(--bgcolor);
+  }
+}
 .EnterButton {
+  color: black;
   position: relative;
   display: inline-block;
   padding: 10px;
@@ -20,6 +37,7 @@ body {
   width: 20%;
   font-size: 2rem;
   font-family: sans-serif;
+
 }
 
 .EnterButton:hover {
