@@ -15,35 +15,83 @@ function WordWrapper() {
         else { impossible++; }
         console.log(easy + " " + medium + " " + hard + " " + impossible);
         
-        Axios.post('https://word-data-database.herokuapp.com/api/insert', {
+        await Axios.post('https://word-data-database.herokuapp.com/api/insert', {
             word: word.word, 
             easy: easy,
             medium: medium,
             hard: hard,
             impossible: impossible
-        });  
-        newWord();
-    }
-    const newWord = () => {
-        getWord({word:Object.keys(data)[Math.floor(Math.random() * Object.keys(data).length)]});
-    };
-    useEffect(() => {
-        const rw = document.getElementsByClassName("random-word")[0];
+        }); 
 
-        console.log("word changed" + " " + rw);
-    }, [word]);
-    const test = async () => {
         let results = await Axios.get('https://word-data-database.herokuapp.com/api/get', {
             params: {word: word.word} 
         }); 
-        console.log(results); 
-        console.log(results.data);
-        console.log(results.data.length == 0);
+        console.log(results.data.length === 0 ? console.log("new data") : console.log("data found"));
+        
+        
+        newWord();
     }
+    const newWord = async () => {
+        async function delay(ms) {
+            // return await for better async stack trace support in case of errors.
+            return await new Promise(resolve => setTimeout(resolve, ms));
+        }
+        switchOpacity();
+        await delay(700);
+        getWord({word:Object.keys(data)[Math.floor(Math.random() * Object.keys(data).length)]});
+        switchOpacity();
+        await delay(700);
+    };
+    const switchOpacity = async () => {
+        const rw = document.querySelector(".random-word");
+        function setOpacity(callback, delay, repetitions) {
+            var x = 0;
+            var intervalID = window.setInterval(function () {
+        
+               callback();
+               if (++x === repetitions) {
+                   window.clearInterval(intervalID);
+               }
+            }, delay);
+        }
+        var op = parseInt(window.getComputedStyle(rw).getPropertyValue("opacity"));
+        console.log(`opacity: ${op}`);
+        switch(op) {
+            case 1: {
+                setOpacity(function(){
+                    op -= 0.01;
+                    rw.style.opacity = op.toString();
+                    //console.log(parseInt(window.getComputedStyle(rw).getPropertyValue("opacity")));
+                }, 0.1, 100);
+                break;
+            }
+            case 0: {
+                setOpacity(function(){
+                    op += 0.01;
+                    rw.style.opacity = op.toString();
+                    //.log(parseInt(window.getComputedStyle(rw).getPropertyValue("opacity")));
+                }, 0.1, 100);
+                break;
+            }
+            default: {
+                console.log("error in swithc");
+                break;
+            }
+        }
+        console.log(window.getComputedStyle(rw).getPropertyValue("opacity"));
+
+    }
+    useEffect(() => {
+        const rw = document.getElementsByClassName("random-word")[0];
+        console.log(`word changed to ${rw.textContent}`);
+        rw.style.width = `${rw.textContent.length}ch`;
+    }, [word]);
+
     return (
-        <div className='container'> 
-            <button onClick={test}>test</button>        
-            <RandomWord word={word.word}/>
+        <div>        
+            <div className='container'>
+                <RandomWord word={word.word} />
+            </div>
             <button className="EnterButton" style={{backgroundColor: 'green'}} onClick={() => insertIntoData("easy")}>
                 easy
             </button>

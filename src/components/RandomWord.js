@@ -1,7 +1,7 @@
 function RandomWord(props){ 
     return (
         <div className="random-word">
-            <p>{props.word}</p>
+            {props.word}
         </div>
     );
 }
