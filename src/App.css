@@ -1,6 +1,7 @@
 
 :root{
   --bgcolor: #282c34;
+  --pctBarSize: 18rem;
 }
 body {
   text-align: center;
@@ -11,7 +12,27 @@ class styling
 */
 .container {
   position: relative;
-  height: 10rem;
+  height: 15rem;
+}
+.container p {
+  width: 100%;
+  text-align: center;
+  font-size: clamp(1rem, 3vw + 1rem, 1.75rem);
+  font-family: "Source Code Pro", monospace;
+  color: white;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  margin: auto;
+}
+
+.lowerContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 }
 
 .random-word {
@@ -19,7 +40,7 @@ class styling
   position: relative;
   margin: auto;
   width: 10%;
-  height: 100%;
+  height: 50%;
   display: flex;
   justify-content: center;
   align-content: center;
@@ -27,19 +48,71 @@ class styling
   opacity: 1;
   font-size: clamp(1rem, 3vw + 1rem, 4rem);
   font-family: "Source Code Pro", monospace;
+  /* animation: fadeIn 1s ease 0s forwards reverse; */
 }
 
+.percentBarContainer {
+  height: var(--pctBarSize);
+  aspect-ratio: 9 / 16;
+  position: relative;
+  margin: 0 auto 20% auto;
+  border: 0.2rem solid white;
+  border-radius: 0.5rem;
+  background-color: white;
+  opacity: 0%;
+  /* animation: fadeIn 1s ease 0s forwards */
+}
+
+.percentage {
+  position: relative;
+  opacity: 0;
+  margin: 10% 0 0 0;
+  font-family: "Source Code Pro", monospace;
+  font-size: clamp(1rem, 3vw + 1rem, 1.5rem);
+  text-align: center;
+  width: 100%;
+  color: white;
+}
+
+.percentBar {
+  border-radius: 0.5rem 0.5rem 0 0;
+  border: none;
+  --barHeight: 0rem;
+  position: relative;
+  background-color: var(--bgcolor);
+  /* animation: barUp 1s ease 0s forwards; */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0%;
+  }
+  to {
+    opacity: 100%;
+  }
+}
+
+@keyframes barUp {
+  from { 
+    height: 100%;
+  }
+  to {
+    height: calc(var(--pctBarSize) - var(--barHeight));
+  }
+}
+/*
+Difficulty Button styling
+*/
 
 .EnterButton {
   color: black;
   position: relative;
   display: inline-block;
-  padding: 10px;
   background-color: hsl(220, 13%, 30%);
   border: none;
   border-radius: 10%;
   aspect-ratio: 16 / 9;
-  width: 20%;
+  width: 100%;
   font-size: clamp(1rem, 3vw + 1rem, 2.5rem);
   font-family: sans-serif;
 
@@ -51,9 +124,4 @@ class styling
 
 .EnterButton:active {
   filter: brightness(0.8)
-}
-
-.space {
-  width: 2%;
-  display: inline-block;
 }
